@@ -1,12 +1,13 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson.Serialization.IdGenerators;
+using System;
 
-namespace Catalog.API.Entities
+namespace Catalog.API.Domain.Entities
 {
     public class Product
     {
         [BsonId(IdGenerator = typeof(GuidGenerator))]
-        public string Id { get; set; }
+        public Guid Id { get; set; }
 
         public string Name { get; set; }
 

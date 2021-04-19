@@ -1,9 +1,8 @@
-﻿using Catalog.API.Entities;
+﻿using Catalog.API.Domain.Entities;
 using Microsoft.Extensions.Configuration;
 using MongoDB.Driver;
-using System;
 
-namespace Catalog.API.Data
+namespace Catalog.API.Infrastructure.Data
 {
     public class CatalogContext : ICatalogContext
     {
@@ -11,8 +10,7 @@ namespace Catalog.API.Data
         {
             var client = new MongoClient(configuration.GetValue<string>("DatabaseSettings:ConnectionString"));
             Database = client.GetDatabase(configuration.GetValue<string>("DatabaseSettings:DatabaseName"));
-
-            Products = Database.GetCollection<Product>(configuration.GetValue<string>("CollectionName"));
+            Products = Database.GetCollection<Product>(configuration.GetValue<string>("DatabaseSettings:CollectionName"));
             CatalogContextSeeder.SeedData(Products);
         }
 
